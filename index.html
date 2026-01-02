@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ensaio clínico sobre a eficácia da Bota de Unna na cicatrização de úlceras venosas. Autor: Aldemar Araujo Castro.">
+    <meta name="version" content="2.3">
+    
+    <!-- METADADOS DE DATA -->
+    <meta name="creation-date" content="2026-01-02">
+    <meta name="update-date" content="2026-01-02">
+
+    <!-- OPEN GRAPH (PARA COMPARTILHAMENTO NO WHATSAPP/LINKEDIN) -->
+    <meta property="og:title" content="Pesquisa: Eficácia da Bota de Unna">
+    <meta property="og:description" content="Ensaio clínico sobre a cicatrização de úlceras venosas comparando Bota de Unna vs Tratamento Convencional.">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="pt_BR">
+    
+    <title>Pesquisa: Bota de Unna | Aldemar Araujo</title>
+    <style>
+        /* --- CONFIGURAÇÕES VISUAIS (V2.3) --- */
+        :root {
+            --cor-fundo: #f8fafc;        
+            --cor-cartao: #ffffff;       
+            --cor-destaque: #0284c7;     
+            --cor-destaque-suave: #e0f2fe;
+            --cor-texto-pri: #0f172a;    
+            --cor-texto-sec: #334155;    
+            --cor-texto-discreto: #94a3b8;
+            
+            --borda-raio: 12px;
+            --sombra: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --fonte-principal: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--fonte-principal);
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto-pri);
+            line-height: 1.6;
+            padding-bottom: 4rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* --- CABEÇALHO --- */
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 1rem;
+        }
+
+        header .badge {
+            background-color: #cbd5e1;
+            color: var(--cor-texto-sec);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 99px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .datas-meta {
+            font-size: 0.65rem;
+            color: var(--cor-texto-discreto);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .autor-topo a {
+            color: var(--cor-destaque);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+        
+        .autor-topo a:hover {
+            border-bottom-color: var(--cor-destaque);
+        }
+
+        .autor-topo { margin-bottom: 0.5rem; }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0.5rem 0;
+            color: var(--cor-texto-pri);
+            line-height: 1.2;
+        }
+
+        header p {
+            font-size: 1.25rem;
+            color: var(--cor-texto-sec);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- SEÇÕES GERAIS --- */
+        section {
+            background-color: var(--cor-cartao);
+            border-radius: var(--borda-raio);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--sombra);
+            position: relative;
+        }
+
+        /* Ícones nos Títulos (SVG Inline) */
+        h2 {
+            font-size: 1.5rem;
+            color: var(--cor-destaque);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--cor-destaque-suave);
+            padding-bottom: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h2 svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        p { color: var(--cor-texto-sec); margin-bottom: 1rem; }
+
+        /* --- BLOCOS DA IDEIA BRILHANTE --- */
+        .pesquisa-box {
+            background-color: var(--cor-destaque-suave);
+            border-left: 4px solid var(--cor-destaque);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .pesquisa-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--cor-destaque);
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            opacity: 0.9;
+        }
+
+        .pesquisa-conteudo {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--cor-texto-pri);
+        }
+        
+        .grid-pesquisa {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        /* --- DESTAQUE: O PITCH --- */
+        .pitch-section {
+            background: linear-gradient(135deg, var(--cor-destaque), #0369a1);
+            color: white;
+            text-align: left;
+        }
+        .pitch-section h2 {
+            color: white;
+            border-color: rgba(255,255,255,0.3);
+            margin: 0 auto 1.5rem auto;
+            display: inline-flex;
+        }
+        .pitch-section p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.2rem;
+            font-weight: 400;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .pitch-section p:last-child {
+            margin-bottom: 0;
+            font-weight: 700;
+        }
+
+        /* --- LINK: PLANO DE INTENÇÃO --- */
+        .botao-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            background-color: white;
+            border: 2px solid var(--cor-destaque);
+            color: var(--cor-destaque);
+            padding: 1.5rem;
+            border-radius: var(--borda-raio);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+            text-align: center;
+            cursor: pointer;
+            gap: 0.5rem;
+        }
+
+        .botao-link:hover {
+            background-color: var(--cor-destaque);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(2, 132, 199, 0.3);
+        }
+
+        /* --- RODAPÉ DUPLO --- */
+        footer {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            color: var(--cor-texto-sec);
+            font-size: 0.9rem;
+        }
+
+        footer p { margin: 0; line-height: 1.4; }
+        footer a { color: var(--cor-destaque); text-decoration: none; font-weight: 600; }
+        footer a:hover { text-decoration: underline; }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .grid-pesquisa { grid-template-columns: 1fr; }
+            header h1 { font-size: 1.8rem; }
+            section { padding: 1.5rem; }
+            .pitch-section p { font-size: 1.1rem; }
+        }
+
+        /* --- MODO IMPRESSÃO (CTRL+P) --- */
+        @media print {
+            body { background-color: white; color: black; }
+            .container { max-width: 100%; padding: 0; }
+            section { 
+                box-shadow: none; 
+                border: 1px solid #ccc; 
+                page-break-inside: avoid; /* Evita quebrar caixa no meio da página */
+            }
+            .pitch-section {
+                background: none;
+                color: black;
+                border: 2px solid black;
+            }
+            .pitch-section h2, .pitch-section p { color: black; }
+            .botao-link { display: none; } /* Não imprime o botão */
+            .botao-link::after { content: "Link: " attr(href); display: block; font-size: 0.8rem; }
+            header { padding: 1rem 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- CABEÇALHO -->
+        <header>
+            <span class="badge">Versão 2.3</span>
+            <div class="datas-meta">Criado em: 02/01/2026 • Atualizado em: 02/01/2026</div>
+            <div class="autor-topo">
+                <a href="http://lattes.cnpq.br/2259022333178681" target="_blank" title="Acessar Currículo Lattes">
+                    Aldemar Araujo Castro
+                </a>
+            </div>
+            <h1>Eficácia da Bota de Unna na Cicatrização</h1>
+            <p>Ensaio clínico sobre úlceras em pacientes com doença venosa crônica</p>
+        </header>
+
+        <!-- SEÇÃO 1: O TEMA -->
+        <section>
+            <h2>
+                <!-- Ícone Livro -->
+                <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                O Tema
+            </h2>
+            <div>
+                <p>A doença venosa crônica representa um desafio significativo de saúde pública, frequentemente resultando em úlceras de difícil manejo. O tratamento convencional, muitas vezes sem a terapia compressiva adequada, pode prolongar o sofrimento do paciente e onerar o sistema de saúde.</p>
+                <p>A investigação de métodos mais eficazes, como a terapia compressiva inelástica, é fundamental para melhorar os desfechos clínicos e a qualidade de vida desses pacientes.</p>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 2: A IDEIA BRILHANTE -->
+        <section>
+            <h2>
+                <!-- Ícone Lâmpada -->
+                <svg viewBox="0 0 24 24"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2v1"></path><path d="M12 7a5 5 0 1 0-4.546 2.916L5 13"></path><path d="M12 7a5 5 0 1 1 4.546 2.916L19 13"></path><path d="M12 2a10 10 0 0 1 0 20"></path></svg>
+                A Ideia Brilhante
+            </h2>
+            
+            <div class="pesquisa-box">
+                <span class="pesquisa-label">Título da Pesquisa</span>
+                <div class="pesquisa-conteudo">
+                    A diferença de frequência da cicatrização completa da úlcera venosa em pacientes com doença venosa crônica que utilizam a Bota de Unna comparada ao tratamento convencional sem compressão.
+                </div>
+            </div>
+
+            <div class="pesquisa-box">
+                <span class="pesquisa-label">Pergunta de Pesquisa</span>
+                <div class="pesquisa-conteudo">
+                    Qual a diferença de frequência da cicatrização completa da úlcera venosa em pacientes com doença venosa crônica que utilizam a Bota de Unna comparada ao tratamento convencional sem compressão?
+                </div>
+            </div>
+
+            <div class="grid-pesquisa">
+                <div class="pesquisa-box">
+                    <span class="pesquisa-label">Hipótese</span>
+                    <div class="pesquisa-conteudo">
+                        A diferença de frequência da cicatrização completa da úlcera venosa em pacientes com doença venosa crônica que utilizam a Bota de Unna comparada ao tratamento convencional sem compressão é de 30%.
+                    </div>
+                </div>
+
+                <div class="pesquisa-box">
+                    <span class="pesquisa-label">Objetivo</span>
+                    <div class="pesquisa-conteudo">
+                        Determinar a diferença da frequência da cicatrização completa da úlcera venosa em pacientes com doença venosa crônica que utilizam a Bota de Unna comparada ao tratamento convencional sem compressão.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: O PITCH -->
+        <section class="pitch-section">
+            <h2>
+                <!-- Ícone Megafone -->
+                <svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+                O Pitch
+            </h2>
+            <div>
+                <p>Imagine a rotina de um paciente que convive com uma ferida aberta na perna por meses ou até anos. Essa é a realidade dolorosa da doença venosa crônica quando tratada apenas de forma superficial. O cuidado padrão, muitas vezes, foca apenas na troca de curativos e ignora a causa hemodinâmica do problema.</p>
+                <p>Nossa pesquisa propõe uma mudança de paradigma. Estamos investigando a eficácia da Bota de Unna, uma terapia de compressão inelástica que atua diretamente no retorno venoso. Nossa hipótese central é robusta: acreditamos que o uso dessa tecnologia elevará em 30% a frequência de cicatrização completa, quando comparada ao tratamento sem compressão.</p>
+                <p>Se confirmarmos esse dado, o impacto vai muito além da estatística. Estamos falando em reduzir drasticamente os custos para o sistema de saúde, diminuir o tempo de internação e, o mais importante, devolver a mobilidade e a dignidade para pacientes que hoje têm suas vidas limitadas pela dor.</p>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: PLANO DE INTENÇÃO -->
+        <section>
+            <h2>
+                <!-- Ícone Checklist/Plano -->
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                Plano de Intenção
+            </h2>
+            <a href="https://docs.google.com/document/d/1iWTcK_Tjkltc47GauWLEo32T10vKmtD86hWyy-Hi9c4/edit?usp=drivesdk" target="_blank" class="botao-link">
+                ACESSAR PLANO DE INTENÇÃO COMPLETO 
+                <!-- Seta externa -->
+                <svg style="width:18px; height:18px;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+        </section>
+
+        <!-- RODAPÉ -->
+        <footer>
+            <p>@2026</p>
+            <p>Modelo idealizado por <a href="https://instagram.com/aldemararaujo" target="_blank">Aldemar Araujo</a></p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
