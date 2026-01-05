@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário One Page 2026</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #e74c3c;
+            --bg-color: #f0f2f5;
+            --border-color: #bdc3c7;
+            --header-bg: #ecf0f1;
+            --table-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .main-container {
+            background: var(--table-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary-color);
+        }
+
+        .year-tag {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Container para rolagem no mobile */
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 2px solid var(--primary-color);
+            text-align: center;
+            min-width: 600px; /* Garante legibilidade no mobile */
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Cabeçalhos */
+        thead th {
+            background-color: var(--header-bg);
+            color: var(--secondary-color);
+        }
+
+        .header-main {
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
+
+        .month-col {
+            width: 28%;
+            text-align: right;
+            padding-right: 15px;
+            font-weight: 800;
+            background-color: #fff;
+            color: #2c3e50;
+            border-right: 3px double var(--border-color);
+        }
+
+        .weekday-cell {
+            font-weight: 600;
+            width: 10.2%;
+        }
+
+        .sunday {
+            color: var(--accent-color);
+            background-color: rgba(231, 76, 60, 0.04);
+        }
+
+        .empty-cell {
+            background-color: #f8f9fa;
+        }
+
+        /* Área de Ação */
+        .actions {
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 5px solid #f1c40f;
+        }
+
+        .instructions {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            max-width: 70%;
+        }
+
+        .instructions strong {
+            color: #d35400;
+        }
+
+        .btn-print {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .btn-print:hover {
+            background-color: #34495e;
+            transform: translateY(-1px);
+        }
+
+        /* Rodapé */
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #95a5a6;
+        }
+
+        /* Estilos de Impressão */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .main-container {
+                box-shadow: none;
+                padding: 0;
+                width: 100%;
+                max-width: 100%;
+            }
+            .actions, footer {
+                display: none;
+            }
+            h1 {
+                font-size: 1.4rem;
+            }
+            table {
+                border: 2px solid black;
+            }
+            th, td {
+                border: 1px solid black;
+                padding: 6px;
+                font-size: 10pt;
+            }
+            .header-main {
+                background-color: #ddd !important;
+                color: black !important;
+                -webkit-print-color-adjust: exact;
+            }
+            .month-col {
+                border-right: 2px solid black;
+            }
+            .sunday {
+                color: black !important;
+                font-weight: bold;
+                text-decoration: underline; /* Para diferenciar em P&B */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <header>
+            <h1>Calendário Perpétuo</h1>
+            <span class="year-tag">2026</span>
+        </header>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th rowspan="5" class="month-col" style="vertical-align: middle; text-align: center;">MESES</th>
+                        <th colspan="7" class="header-main">Dias do Mês</th>
+                    </tr>
+                    <!-- Matriz de Dias -->
+                    <tr>
+                        <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+                    </tr>
+                    <tr>
+                        <th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th>
+                    </tr>
+                    <tr>
+                        <th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th><th>21</th>
+                    </tr>
+                    <tr>
+                        <th>22</th><th>23</th><th>24</th><th>25</th><th>26</th><th>27</th><th>28</th>
+                    </tr>
+                    <tr>
+                        <td class="month-col" style="border:none; text-align: center; font-size: 0.8rem; font-style: italic; color: #95a5a6;">(Fim do mês)</td>
+                        <th>29</th><th>30</th><th>31</th>
+                        <td colspan="4" class="empty-cell"></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="height: 15px; background-color: var(--primary-color); border: none;">
+                        <td colspan="8" style="padding: 0;"></td>
+                    </tr>
+
+                    <!-- Lógica 2026: Grupos de Meses -->
+                    
+                    <!-- FEV, MAR, NOV (Início: Domingo) -->
+                    <tr>
+                        <td class="month-col">FEV, MAR, NOV</td>
+                        <td class="weekday-cell sunday">DOM</td>
+                        <td class="weekday-cell">SEG</td>
+                        <td class="weekday-cell">TER</td>
+                        <td class="weekday-cell">QUA</td>
+                        <td class="weekday-cell">QUI</td>
+                        <td class="weekday-cell">SEX</td>
+                        <td class="weekday-cell">SÁB</td>
+                    </tr>
+
+                    <!-- JUN (Início: Segunda) -->
+                    <tr>
+                        <td class="month-col">JUN</td>
+                        <td class="weekday-cell">SEG</td>
+                        <td class="weekday-cell">TER</td>
+                        <td class="weekday-cell">QUA</td>
+                        <td class="weekday-cell">QUI</td>
+                        <td class="weekday-cell">SEX</td>
+                        <td class="weekday-cell">SÁB</td>
+                        <td class="weekday-cell sunday">DOM</td>
+                    </tr>
+
+                    <!-- SET, DEZ (Início: Terça) -->
+                    <tr>
+                        <td class="month-col">SET, DEZ</td>
+                        <td class="weekday-cell">TER</td>
+                        <td class="weekday-cell">QUA</td>
+                        <td class="weekday-cell">QUI</td>
+                        <td class="weekday-cell">SEX</td>
+                        <td class="weekday-cell">SÁB</td>
+                        <td class="weekday-cell sunday">DOM</td>
+                        <td class="weekday-cell">SEG</td>
+                    </tr>
+
+                    <!-- ABR, JUL (Início: Quarta) -->
+                    <tr>
+                        <td class="month-col">ABR, JUL</td>
+                        <td class="weekday-cell">QUA</td>
+                        <td class="weekday-cell">QUI</td>
+                        <td class="weekday-cell">SEX</td>
+                        <td class="weekday-cell">SÁB</td>
+                        <td class="weekday-cell sunday">DOM</td>
+                        <td class="weekday-cell">SEG</td>
+                        <td class="weekday-cell">TER</td>
+                    </tr>
+
+                    <!-- JAN, OUT (Início: Quinta) -->
+                    <tr>
+                        <td class="month-col">JAN, OUT</td>
+                        <td class="weekday-cell">QUI</td>
+                        <td class="weekday-cell">SEX</td>
+                        <td class="weekday-cell">SÁB</td>
+                        <td class="weekday-cell sunday">DOM</td>
+                        <td class="weekday-cell">SEG</td>
+                        <td class="weekday-cell">TER</td>
+                        <td class="weekday-cell">QUA</td>
+                    </tr>
+
+                    <!-- MAI (Início: Sexta) -->
+                    <tr>
+                        <td class="month-col">MAI</td>
+                        <td class="weekday-cell">SEX</td>
+                        <td class="weekday-cell">SÁB</td>
+                        <td class="weekday-cell sunday">DOM</td>
+                        <td class="weekday-cell">SEG</td>
+                        <td class="weekday-cell">TER</td>
+                        <td class="weekday-cell">QUA</td>
+                        <td class="weekday-cell">QUI</td>
+                    </tr>
+
+                    <!-- AGO (Início: Sábado) -->
+                    <tr>
+                        <td class="month-col">AGO</td>
+                        <td class="weekday-cell">SÁB</td>
+                        <td class="weekday-cell sunday">DOM</td>
+                        <td class="weekday-cell">SEG</td>
+                        <td class="weekday-cell">TER</td>
+                        <td class="weekday-cell">QUA</td>
+                        <td class="weekday-cell">QUI</td>
+                        <td class="weekday-cell">SEX</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="actions">
+            <div class="instructions">
+                <strong>Como funciona:</strong> Escolha o mês na esquerda, siga a linha até encontrar o dia da semana correspondente à data nas colunas superiores.
+            </div>
+            <button class="btn-print" onclick="window.print()">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                Imprimir
+            </button>
+        </div>
+
+        <footer>
+            Gerado automaticamente para o ano civil de 2026.
+        </footer>
+    </div>
+
+</body>
+</html>
