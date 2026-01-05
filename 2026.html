@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário Perpétuo 2026</title>
+    <!-- Tailwind CSS via CDN para estilização moderna sem build steps -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        indigo: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Ajustes finos para impressão */
+        @media print {
+            body { background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .no-print { display: none !important; }
+            .print-visible { display: block !important; }
+            .print-border { border: 1px solid #000 !important; }
+            .print-text-black { color: #000 !important; }
+        }
+        
+        /* Animação suave para as células */
+        td, th { transition: all 0.2s ease-in-out; }
+        
+        /* Efeito de Ping para a célula selecionada */
+        @keyframes ping-slow {
+            75%, 100% { transform: scale(2); opacity: 0; }
+        }
+        .animate-ping-slow {
+            animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-100 text-slate-800 font-sans p-4 md:p-8 flex flex-col items-center print:p-0 print:bg-white">
+
+    <!-- MENU DE CONTROLO (Escondido na impressão) -->
+    <div class="w-full max-w-5xl mb-6 bg-white p-4 rounded-xl shadow-sm border border-slate-200 no-print flex flex-col md:flex-row justify-between items-center gap-4 transition-all hover:shadow-md">
+        <div class="flex items-center gap-3 w-full md:w-auto">
+            <div class="bg-indigo-100 p-2 rounded-lg text-indigo-700 shrink-0">
+                <!-- Icon Search -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+            <div class="flex-1">
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">
+                    Simular Data (2026)
+                </label>
+                <input 
+                    type="date" 
+                    id="dateInput"
+                    min="2026-01-01"
+                    max="2026-12-31"
+                    class="w-full border border-slate-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 cursor-pointer"
+                >
+            </div>
+        </div>
+
+        <div class="flex gap-2 w-full md:w-auto justify-end">
+            <button 
+                onclick="clearHighlights()"
+                id="clearBtn"
+                disabled
+                class="flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors"
+            >
+                <!-- Icon Rotate -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><polyline points="23 20 23 14 17 14"></polyline><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path></svg>
+                <span class="hidden sm:inline">Limpar</span>
+            </button>
+            <button 
+                onclick="window.print()"
+                class="flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors shadow-sm"
+            >
+                <!-- Icon Printer -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                Imprimir
+            </button>
+        </div>
+    </div>
+
+    <!-- CARTÃO PRINCIPAL -->
+    <div class="bg-white w-full max-w-5xl rounded-2xl shadow-xl overflow-hidden print:shadow-none print:w-full print:max-w-none print:rounded-none border border-slate-200 print:border-none">
+        
+        <!-- Cabeçalho do Calendário -->
+        <header class="bg-slate-900 text-white p-6 flex flex-col md:flex-row justify-between items-center print:bg-white print:text-black print:border-b-2 print:border-black print:p-4 print:block">
+            <div class="flex items-center gap-3 mb-4 md:mb-0 print:mb-0">
+                <div class="p-3 bg-white/10 rounded-lg no-print">
+                    <!-- Icon Calendar -->
+                    <svg class="text-indigo-300" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                </div>
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold tracking-tight uppercase">
+                        Calendário Perpétuo
+                    </h1>
+                    <p class="text-slate-400 text-sm mt-0.5 print:text-slate-600">Sistema One Page &bull; Planeamento Visual</p>
+                </div>
+            </div>
+            <div class="text-right print:absolute print:top-4 print:right-4">
+                <span class="block text-5xl font-black tracking-tighter text-indigo-400 print:text-black">2026</span>
+            </div>
+        </header>
+
+        <!-- Tabela -->
+        <div class="p-2 md:p-6 overflow-x-auto print:p-0 print:overflow-visible">
+            <table class="w-full border-collapse min-w-[700px]" id="calendarTable">
+                <thead>
+                    <tr>
+                        <th rowspan="6" class="w-[28%] bg-slate-50 border-r-4 double border-slate-200 p-4 text-right align-middle print:border-black print:bg-white">
+                            <span class="block text-slate-400 text-[10px] uppercase font-bold tracking-widest mb-1">Passo 1</span>
+                            <span class="block text-xl font-black text-slate-800">MÊS</span>
+                        </th>
+                        <th colspan="7" class="bg-indigo-600 text-white py-2 text-sm font-bold uppercase tracking-widest print:bg-slate-200 print:text-black print:border print:border-black">
+                            Passo 2: Dias do Mês
+                        </th>
+                    </tr>
+
+                    <!-- Linhas de Datas (Geradas via JS seria possível, mas HTML estático é mais seguro para ficheiro único) -->
+                    <!-- Linha 1 -->
+                    <tr class="date-row">
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="0">1</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="1">2</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="2">3</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="3">4</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="4">5</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="5">6</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="6">7</th>
+                    </tr>
+                    <!-- Linha 2 -->
+                    <tr class="date-row">
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="0">8</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="1">9</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="2">10</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="3">11</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="4">12</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="5">13</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="6">14</th>
+                    </tr>
+                    <!-- Linha 3 -->
+                    <tr class="date-row">
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="0">15</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="1">16</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="2">17</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="3">18</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="4">19</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="5">20</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="6">21</th>
+                    </tr>
+                    <!-- Linha 4 -->
+                    <tr class="date-row">
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="0">22</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="1">23</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="2">24</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="3">25</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="4">26</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="5">27</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="6">28</th>
+                    </tr>
+                    <!-- Linha 5 -->
+                    <tr class="date-row">
+                        <td class="border border-slate-200 text-center text-xs text-slate-400 italic p-1 bg-slate-50 print:border-black print:text-black">(Sobra mês)</td>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="1">29</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="2">30</th>
+                        <th class="date-header border border-slate-200 p-2 md:p-3 text-lg font-bold bg-white text-slate-600 print:border-black print:text-black" data-col="3">31</th>
+                        <td class="bg-slate-50 border border-slate-200 print:bg-white print:border-black"></td>
+                        <td class="bg-slate-50 border border-slate-200 print:bg-white print:border-black"></td>
+                        <td class="bg-slate-50 border border-slate-200 print:bg-white print:border-black"></td>
+                    </tr>
+                </thead>
+
+                <!-- CORPO DO CALENDÁRIO (Lógica 2026) -->
+                <tbody id="calendarBody">
+                    <tr class="h-4 bg-slate-800 no-print"><td colspan="8"></td></tr>
+                    <tr class="hidden print:table-row h-1 bg-black"><td colspan="8"></td></tr>
+                    
+                    <!-- Grupos gerados dinamicamente para facilitar manutenção -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Instruções -->
+        <div class="bg-yellow-50 p-5 border-t border-yellow-100 flex gap-4 items-start no-print">
+            <div class="bg-yellow-100 p-2 rounded-full text-yellow-700 shrink-0 mt-0.5">
+                <!-- Icon Info -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            </div>
+            <div class="text-sm text-yellow-900">
+                <strong class="block mb-1 text-yellow-800">Passo a Passo:</strong>
+                <ol class="list-decimal ml-4 space-y-1 text-yellow-800/80">
+                    <li>Localize o <span class="font-bold">Mês</span> desejado na coluna da esquerda.</li>
+                    <li>Siga a linha horizontalmente para a direita.</li>
+                    <li>Pare na coluna correspondente ao <span class="font-bold">Dia do Mês</span> (números no topo).</li>
+                    <li>A célula onde parou indica o <span class="font-bold">Dia da Semana</span>.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="hidden print:block text-center text-[10px] text-slate-500 p-2 border-t border-black mt-2">
+            Documento gerado automaticamente. Válido apenas para o ano civil de 2026.
+        </div>
+    </div>
+
+    <!-- Scripts de Lógica -->
+    <script>
+        // Configurações 2026
+        const YEAR = 2026;
+        const weekDays = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
+        
+        // Mapeamento de Grupos (ID, Meses Index 0-11, Nomes, StartDay 0=Dom)
+        const groups = [
+            { id: 'g1', months: [1, 2, 10], names: "FEV, MAR, NOV", startDay: 0 }, // Dom
+            { id: 'g2', months: [5],        names: "JUN",           startDay: 1 }, // Seg
+            { id: 'g3', months: [8, 11],    names: "SET, DEZ",      startDay: 2 }, // Ter
+            { id: 'g4', months: [3, 6],     names: "ABR, JUL",      startDay: 3 }, // Qua
+            { id: 'g5', months: [0, 9],     names: "JAN, OUT",      startDay: 4 }, // Qui
+            { id: 'g6', months: [4],        names: "MAI",           startDay: 5 }, // Sex
+            { id: 'g7', months: [7],        names: "AGO",           startDay: 6 }, // Sab
+        ];
+
+        // Elementos DOM
+        const calendarBody = document.getElementById('calendarBody');
+        const dateInput = document.getElementById('dateInput');
+        const clearBtn = document.getElementById('clearBtn');
+
+        // Inicialização
+        function init() {
+            renderGroups();
+            dateInput.addEventListener('change', handleInput);
+            
+            // Permitir clicar nas linhas para destacar
+            calendarBody.addEventListener('click', (e) => {
+                const tr = e.target.closest('tr');
+                if (!tr || !tr.dataset.group) return;
+                
+                // Se clicar numa linha, simula uma seleção simples (sem data específica)
+                highlightGroup(tr.dataset.group);
+                // Remove seleção de data específica se houver
+                document.querySelectorAll('.is-intersection').forEach(el => removeIntersectionStyles(el));
+                dateInput.value = '';
+                clearBtn.disabled = false;
+            });
+        }
+
+        // Renderizar as linhas dos meses
+        function renderGroups() {
+            calendarBody.innerHTML = '';
+            // Separador (re-adicionar)
+            calendarBody.innerHTML += `<tr class="h-4 bg-slate-800 no-print"><td colspan="8"></td></tr>`;
+            calendarBody.innerHTML += `<tr class="hidden print:table-row h-1 bg-black"><td colspan="8"></td></tr>`;
+
+            groups.forEach(group => {
+                const tr = document.createElement('tr');
+                tr.className = "group transition-colors duration-200 cursor-pointer hover:bg-slate-50";
+                tr.dataset.group = group.id;
+
+                // Coluna Mês
+                let html = `
+                    <td class="month-cell text-right p-3 md:p-4 font-bold border-r-4 border-slate-200 print:border-black print:border-r-2 text-slate-700 transition-colors duration-200">
+                        ${group.names}
+                    </td>
+                `;
+
+                // Colunas Dias da Semana
+                for (let i = 0; i < 7; i++) {
+                    const dayIndex = (group.startDay + i) % 7;
+                    const dayName = weekDays[dayIndex];
+                    const isSunday = dayName === 'DOM';
+                    
+                    const classes = `text-center p-2 border border-slate-200 font-medium relative print:border-black weekday-cell 
+                                    ${isSunday ? 'text-red-500 font-bold bg-red-50/30 print:text-black print:underline' : 'text-slate-600'}`;
+                    
+                    html += `<td class="${classes}" data-col="${i}">${dayName}</td>`;
+                }
+                
+                tr.innerHTML = html;
+                calendarBody.appendChild(tr);
+            });
+        }
+
+        // Lógica de Highlight
+        function handleInput(e) {
+            const val = e.target.v
